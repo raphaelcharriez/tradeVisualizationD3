@@ -337,8 +337,6 @@ class TradeFlower extends Component {
                   
                 }
 
-
-
                 data.forEach((c) => {
                     output["children"].push({
                         name: c[name.name],
@@ -370,7 +368,7 @@ class TradeFlower extends Component {
                         name: c[name.name].slice(0,index),
                         value: c[name.value],
                         label: c["commodity"],
-                        colorIndex: c["dependancy"] * 10,
+                        colorIndex: Math.min( Math.max(c["dependancy"] * 5, -9), 9),
                         children: []
                     })
                 })

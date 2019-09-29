@@ -1,11 +1,10 @@
 import {
-    IProduct    
-} from "../../Types/index"
+    IProduct,
+} from "../../Types/index";
 
-
-export function convertProduct(rawProduct: {commodity_code : string, commodity: string}):  IProduct {
+export function convertProduct(rawProduct: {commodity_code: string, commodity: string}): IProduct {
     return {
-        "commodityCode": rawProduct.commodity_code,
-        "commodity": rawProduct.commodity
-    }
-} 
+        commodity: rawProduct.commodity,
+        commodityCode: rawProduct.commodity_code,
+    };
+}

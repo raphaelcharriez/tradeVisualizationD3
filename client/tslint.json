@@ -1,0 +1,13 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended",
+        "tslint-react",
+        "tslint-blueprint"
+    ],
+    "jsRules": {},
+    "rules": {
+        "jsx-alignment": true
+    },
+    "rulesDirectory": []
+}

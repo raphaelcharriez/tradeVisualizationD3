@@ -1,28 +1,23 @@
 import * as React from "react";
 
 import { Button, MenuItem} from "@blueprintjs/core";
-import { ItemRenderer, ItemPredicate, MultiSelect } from "@blueprintjs/select";
+import { ItemPredicate, ItemRenderer, MultiSelect } from "@blueprintjs/select";
 import {
-    IProduct    
-} from "../Types/index"
+    IProduct,
+} from "../Types/index";
 
 const ProductMultiSelect = MultiSelect.ofType<IProduct>();
-
-export interface IState {
-}
 
 export interface IProps {
     id: string;
     data: IProduct[];
     selectedProducts: IProduct[];
-    selectProducts: (productsToSelect: IProduct[]) => void
-    deselectProduct: (index: number) => void
-    handleClearProducts: () => void
+    selectProducts: (productsToSelect: IProduct[]) => void;
+    deselectProduct: (index: number) => void;
+    handleClearProducts: () => void;
 }
 
-            
-
-export class MultiSelectProduct extends React.PureComponent<IProps, IState> {
+export class MultiSelectProduct extends React.PureComponent<IProps, {}> {
 
     public state =  {
         allowCreate: false,
@@ -39,8 +34,10 @@ export class MultiSelectProduct extends React.PureComponent<IProps, IState> {
     public render() {
         const { allowCreate, hasInitialContent, tagMinimal, popoverMinimal, ...flags } = this.state;
         const clearButton =
-            this.props.selectedProducts.length > 0 ? <Button icon="cross" minimal={true} onClick={this.props.handleClearProducts} /> : undefined;
-        
+            this.props.selectedProducts.length > 0 ?
+            <Button icon="cross" minimal={true} onClick={this.props.handleClearProducts} /> :
+            undefined;
+
         return (
                 <ProductMultiSelect
                     {...flags}
@@ -48,7 +45,7 @@ export class MultiSelectProduct extends React.PureComponent<IProps, IState> {
                     initialContent={undefined}
                     itemRenderer={this.renderProduct}
                     itemPredicate={this.filterProduct}
-                    itemsEqual={(pA: IProduct, pB: IProduct) => { return pA.commodityCode === pB.commodityCode}}
+                    itemsEqual={this.productsEqual}
                     items={this.props.data}
                     noResults={<MenuItem disabled={true} text="No results." />}
                     onItemSelect={this.handleProductSelect}
@@ -61,6 +58,8 @@ export class MultiSelectProduct extends React.PureComponent<IProps, IState> {
 
         );
     }
+
+    private productsEqual = (pA: IProduct, pB: IProduct) => pA.commodityCode === pB.commodityCode;
 
     private renderTag = (product: IProduct) => `${product.commodityCode}. ${product.commodity}`;
 
@@ -78,18 +77,18 @@ export class MultiSelectProduct extends React.PureComponent<IProps, IState> {
                 shouldDismissPopover={false}
             />
         );
-    };
+    }
 
     private filterProduct: ItemPredicate<IProduct> = (query, product, _index, exactMatch) => {
         const normalizedTitle = product.commodity.toLowerCase();
         const normalizedQuery = query.toLowerCase();
-    
+
         if (exactMatch) {
             return normalizedTitle === normalizedQuery;
         } else {
             return `${product.commodityCode}.  ${product.commodity}`.indexOf(normalizedQuery) >= 0;
         }
-    };
+    }
 
     private getSelectedProductIndex(product: IProduct) {
         return this.props.selectedProducts.indexOf(product);
@@ -109,15 +108,14 @@ export class MultiSelectProduct extends React.PureComponent<IProps, IState> {
         } else {
             this.props.deselectProduct(this.getSelectedProductIndex(product));
         }
-    };
+    }
 
     private handleProductPaste = (product: IProduct[]) => {
         this.props.selectProducts(product);
-    };
+    }
 
     private handleProductRemove = (_tag: string, index: number) => {
         this.props.deselectProduct(index);
-    };
+    }
 
-    
 }

@@ -1,6 +1,5 @@
 import { Classes, FormGroup, HTMLTable, Icon, Intent } from "@blueprintjs/core";
-import React from "react"; 
-
+import React from "react";
 
 interface IProps {
     countryBalance: any[];
@@ -10,16 +9,16 @@ interface IProps {
     label: string;
 }
 
-export function StatisticsTable(props: IProps){
+export function StatisticsTable(props: IProps) {
 
-    const topExporters :{reporter_iso: string, export_value: number, import_value: number}[] 
+    const topExporters: Array<{reporter_iso: string, export_value: number, import_value: number}>
             = props.countryBalance.sort(
                 (a, b) => ( a[props.metric] < b[props.metric] ? 1 : -1
-                )).slice(0, props.display-1);
-    
+                )).slice(0, props.display - 1);
+
     const dataRows = prepareTableRows(topExporters, props.metric);
-    
-    const tableBody = dataRows.map(row => {
+
+    const tableBody = dataRows.map((row) => {
         return(
             <tr key={row.countryCode}>
                 <td style={{width: "10%"}}>{row.action}</td>
@@ -28,11 +27,11 @@ export function StatisticsTable(props: IProps){
             </tr>
         );
     });
-    
+
     return (
-        <div> 
+        <div>
             <HTMLTable bordered={true} condensed={true} striped={true}>
-                <thead> 
+                <thead>
                     <tr>
                         <th>{""}</th>
                         <th>{"Country"}</th>
@@ -42,33 +41,39 @@ export function StatisticsTable(props: IProps){
                 <tbody>{tableBody}</tbody>
             </HTMLTable>
         </div>
-    )
-    
+    );
+
 }
 
 function prepareTableRows(
-    topExporters: {reporter_iso: string, export_value: number, import_value: number}[],
-    metric: string
+    topExporters: Array<{reporter_iso: string, export_value: number, import_value: number}>,
+    metric: string,
 ) {
-    const rows: Array<{countryCode: string, rawValue:number, action: JSX.Element, country: JSX.Element, value: JSX.Element}> = [];
-    
-    topExporters.forEach( e => {
-        const val = metric === "export_value" ? e.export_value : e.import_value;  
+    const rows: Array<{
+        countryCode: string,
+        rawValue: number,
+        action: JSX.Element,
+        country: JSX.Element,
+        value: JSX.Element,
+    }> = [];
 
-        const action = <div> > </div>
+    topExporters.forEach( (e) => {
+        const val = metric === "export_value" ? e.export_value : e.import_value;
 
-        const country = <div> {e.reporter_iso}</div>
+        const action = <div> > </div>;
 
-        const value = <div> {val} {"USD"}</div>
+        const country = <div> {e.reporter_iso}</div>;
+
+        const value = <div> {val} {"USD"}</div>;
         rows.push({
+            action,
+            country,
             countryCode: e.reporter_iso,
             rawValue: val,
-            action: action,
-            country: country,
-            value: value,
-        })
-    }
-    )
+            value,
+        });
+    },
+    );
 
     return rows;
 }
