@@ -19,11 +19,15 @@
     "d3-scale": "^3.0.1",
     "d3-selection": "^1.4.0",
     "d3-timer": "^1.0.9",
+    "eslint": "^6.5.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-draggable": "^3.3.2",
     "react-scripts": "3.1.1",
     "react-select": "^3.0.4",
+    "tslint": "^5.20.0",
+    "tslint-blueprint": "^0.1.0",
+    "tslint-react": "^4.1.0",
     "typescript": "3.6.2"
   },
   "scripts": {

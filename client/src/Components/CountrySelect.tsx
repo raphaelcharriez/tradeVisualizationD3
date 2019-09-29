@@ -1,22 +1,21 @@
 import * as React from "react";
 
 import { Button, MenuItem } from "@blueprintjs/core";
-import { Select, ItemRenderer, ItemPredicate } from "@blueprintjs/select";
+import { ItemPredicate, ItemRenderer, Select } from "@blueprintjs/select";
 import {
-    ICountry  
-} from "../Types/index"
+    ICountry,
+} from "../Types/index";
 
 // Select<T> is a generic component to work with your data types.
 // In TypeScript, you must first obtain a non-generic reference:
 
-
 export interface IProps {
     selectedCountry: ICountry;
     countries: ICountry[];
-    selectCountry: (countryToSelect: ICountry) => void
+    selectCountry: (countryToSelect: ICountry) => void;
 }
 
-export function CountrySelect (props: IProps) {
+export function CountrySelect(props: IProps) {
 
     const TypedSelect = Select.ofType<ICountry>();
 
@@ -27,7 +26,7 @@ export function CountrySelect (props: IProps) {
         return (
             <MenuItem
                 active={modifiers.active}
-                icon= "blank"
+                icon="blank"
                 key={`${country.countryCode}. ${country.country}`}
                 onClick={handleClick}
                 text={`${country.countryCode}. ${country.country}`}
@@ -40,13 +39,11 @@ export function CountrySelect (props: IProps) {
         const normalizedTitle = country.country.toLowerCase();
         const normalizedCountryCode = country.countryCode.toLowerCase();
         const normalizedQuery = query.toLowerCase();
-    
-        
+
         return `${normalizedTitle}.  ${normalizedCountryCode}`.indexOf(normalizedQuery) >= 0;
 
     };
 
-    
     return (
         <div >
             <TypedSelect
@@ -55,14 +52,15 @@ export function CountrySelect (props: IProps) {
                 itemPredicate={filterCountry}
                 noResults={<MenuItem disabled={true} text="No results." />}
                 onItemSelect={props.selectCountry}
-            >     
-            <Button text={props.selectedCountry.countryCode} rightIcon="double-caret-vertical" style={{width: "180px"}} />
+            >
+            <Button
+                text={props.selectedCountry.countryCode}
+                rightIcon="double-caret-vertical"
+                style={{width: "180px"}}
+            />
             </TypedSelect>
         </div>
-            
+
     );
 
-    
-
-    
 }
