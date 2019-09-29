@@ -12,7 +12,9 @@
   background-color: #394B59;
   height: 100%;
 }
-
+body {
+  background-color: black;
+}
 .App-intro {
   font-size: large;
 }
@@ -82,3 +84,5 @@ path.hearth {
 .right {
   width: 70%;
 }
+
+button {margin: 2.5px;}

@@ -5,12 +5,10 @@ export interface IProduct {
 
 
 export interface ICountry {
-    languageName: string;
-    enthusiasmLevel: number;
+    countryCode: string;
+    country: string;
 }
 
 
 export interface ITransaction {
-    languageName: string;
-    enthusiasmLevel: number;
 }

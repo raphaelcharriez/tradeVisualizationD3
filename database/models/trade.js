@@ -14,31 +14,46 @@ Trade.findAllCountries = () => {
     );
 };
 
-Trade.findTopImportsCountry = (country) => {
+Trade.findTopImportsCountry = (reporter, partner) => {
     return db.query(
-        `SELECT 
+        `SELECT commodity_code,
+        commodity,
+        "trade_value_(us$)" as trade_value,
+        dependancy,
+        total_export_reporter,
+        total_import_partner,
+        total_trade,
+        reporter_iso,
+        partner_iso
         FROM trade    
-        WHERE trade_flow_code = 1
-        AND reporter_iso = $1
-        AND partner_iso = 'WLD'
+        WHERE trade_flow_code = '1.0'
+        AND LOWER(reporter_iso) = LOWER('${reporter}')
+        AND LOWER(partner_iso) = LOWER('${partner}')
         ORDER BY "trade_value_(us$)" desc 
-        limit 100 
-        `,
-        [country]
+        limit 10000 
+        `
     );
 };
 
-Trade.findTopExportsCountry = (country) => {
+Trade.findTopExportsCountry = (reporter, partner) => {
     return db.query(
-        `SELECT commodity_code, commodity, CAST("trade_value_(us$)" AS REAL)) as trade_value
+        `SELECT commodity_code,
+        commodity,
+        "trade_value_(us$)" as trade_value,
+        dependancy,
+        total_export_reporter,
+        total_import_partner,
+        total_trade,
+        reporter_iso,
+        partner_iso
         FROM trade    
-        WHERE trade_flow_code = 2
-        AND reporter_iso = $1
-        AND partner_iso = 'WLD'
-        ORDER BY CAST("trade_value_(us$)" AS REAL)) as trade_value desc 
-        limit 100 
+        WHERE trade_flow_code = '2.0'
+        AND LOWER(reporter_iso) = LOWER('${reporter}')
+        AND LOWER(partner_iso) = LOWER('${partner}')
+        ORDER BY "trade_value_(us$)" desc 
+        limit 10000 
         `,
-        [country]
+        [reporter, partner]
     );
 };
 

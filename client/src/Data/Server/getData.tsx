@@ -29,3 +29,23 @@ export const  callCountryBalanceAPI = async (commodityCodes: string[]) => {
     }
     return body;
   };
+
+export const callCountryImportsAPI = async (reporter: string, partner: string) => {
+    const response = await fetch(`/api/trades/imports-country?reporter=${reporter}&partner=${partner}`);
+    const body = await response.json();
+
+    if (response.status !== 200) {
+      throw Error(body.message) 
+    }
+    return body;
+};
+
+export const callCountryExportsAPI = async (reporter: string, partner: string) => {
+    const response = await fetch(`/api/trades/exports-country?reporter=${reporter}&partner=${partner}`);
+    const body = await response.json();
+
+    if (response.status !== 200) {
+      throw Error(body.message) 
+    }
+    return body;
+};

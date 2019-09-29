@@ -1,7 +1,7 @@
 import * as React from "react";
 
-import { Button, MenuItem } from "@blueprintjs/core";
-import { ItemRenderer, MultiSelect } from "@blueprintjs/select";
+import { Button, MenuItem} from "@blueprintjs/core";
+import { ItemRenderer, ItemPredicate, MultiSelect } from "@blueprintjs/select";
 import {
     IProduct    
 } from "../Types/index"
@@ -40,13 +40,14 @@ export class MultiSelectProduct extends React.PureComponent<IProps, IState> {
         const { allowCreate, hasInitialContent, tagMinimal, popoverMinimal, ...flags } = this.state;
         const clearButton =
             this.props.selectedProducts.length > 0 ? <Button icon="cross" minimal={true} onClick={this.props.handleClearProducts} /> : undefined;
-
+        
         return (
                 <ProductMultiSelect
                     {...flags}
                     fill={true}
                     initialContent={undefined}
                     itemRenderer={this.renderProduct}
+                    itemPredicate={this.filterProduct}
                     itemsEqual={(pA: IProduct, pB: IProduct) => { return pA.commodityCode === pB.commodityCode}}
                     items={this.props.data}
                     noResults={<MenuItem disabled={true} text="No results." />}
@@ -55,12 +56,13 @@ export class MultiSelectProduct extends React.PureComponent<IProps, IState> {
                     popoverProps={{ minimal: true }}
                     tagRenderer={this.renderTag}
                     selectedItems={this.props.selectedProducts}
+                    tagInputProps={{ onRemove: this.handleProductRemove, rightElement: clearButton }}
                 />
 
         );
     }
 
-    private renderTag = (product: IProduct) => product.commodityCode;
+    private renderTag = (product: IProduct) => `${product.commodityCode}. ${product.commodity}`;
 
     private renderProduct: ItemRenderer<IProduct> = (product, { modifiers, handleClick }) => {
         if (!modifiers.matchesPredicate) {
@@ -78,6 +80,16 @@ export class MultiSelectProduct extends React.PureComponent<IProps, IState> {
         );
     };
 
+    private filterProduct: ItemPredicate<IProduct> = (query, product, _index, exactMatch) => {
+        const normalizedTitle = product.commodity.toLowerCase();
+        const normalizedQuery = query.toLowerCase();
+    
+        if (exactMatch) {
+            return normalizedTitle === normalizedQuery;
+        } else {
+            return `${product.commodityCode}.  ${product.commodity}`.indexOf(normalizedQuery) >= 0;
+        }
+    };
 
     private getSelectedProductIndex(product: IProduct) {
         return this.props.selectedProducts.indexOf(product);
@@ -101,6 +113,10 @@ export class MultiSelectProduct extends React.PureComponent<IProps, IState> {
 
     private handleProductPaste = (product: IProduct[]) => {
         this.props.selectProducts(product);
+    };
+
+    private handleProductRemove = (_tag: string, index: number) => {
+        this.props.deselectProduct(index);
     };
 
     

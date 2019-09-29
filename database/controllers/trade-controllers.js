@@ -35,8 +35,9 @@ tradeController.findAllCountries = (req, res) => {
 };
 
 tradeController.findTopImportsCountry = (req, res) => {
-    const country = req.params.country
-    Trade.findTopImportsCountry(country)
+    const reporter = req.query.reporter
+    const partner = req.query.partner
+    Trade.findTopImportsCountry(reporter, partner)
     .then( products => {
         res.json({
             message: 'Success', 
@@ -52,8 +53,9 @@ tradeController.findTopImportsCountry = (req, res) => {
 };
 
 tradeController.findTopExportsCountry = (req, res) => {
-    const country = req.params.country
-    Trade.findTopExportsCountry(country)
+    const reporter = req.query.reporter
+    const partner = req.query.partner
+    Trade.findTopExportsCountry(reporter, partner)
     .then( products => {
         res.json({
             message: 'Success', 

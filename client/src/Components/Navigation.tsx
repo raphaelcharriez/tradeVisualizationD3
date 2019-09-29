@@ -17,45 +17,81 @@
 import * as React from "react";
 
 import {
-    Alignment,
     Button,
     Classes,
-    H5,
     Navbar,
-    NavbarDivider,
-    NavbarGroup,
-    NavbarHeading,
-    Switch,
     Icon,
 } from "@blueprintjs/core";
-import { Example, handleBooleanChange, IExampleProps } from "@blueprintjs/docs-theme";
 import { IconNames } from "@blueprintjs/icons";
- 
+import '../App.css'; 
 
-export class NavbarExample extends React.PureComponent {
+export interface IState {
+}
+
+export interface IProps {
+    showCountriesPannel: boolean; 
+    showProductPannel: boolean;
+    mapProjection: string;
+    handleClickDisplayCountryPannel: () => void;
+    handleClickDisplayProductPannel: () => void;
+    handleClick3d: () => void
+    handleClick2d: () => void
+}
+
+export class NavbarExample extends React.PureComponent<IProps, IState> {
     
-
     public render() {
-        const alignRight =  true ;
         
         return (
-           
-                <Navbar className={`${Classes.NAVBAR} ${Classes.DARK}`}>
-           
-                  <div className={`${Classes.NAVBAR_GROUP} ${Classes.ALIGN_LEFT}`}>
-                    <div className={Classes.NAVBAR_HEADING}>Trade</div>
-             
-                  <div className={`${Classes.NAVBAR_GROUP} ${Classes.ALIGN_RIGHT}`}>
-                    <Button className={`${Classes.BUTTON} ${Classes.MINIMAL}`}> 
-<Icon icon={IconNames.GRAPH} iconSize={Icon.SIZE_STANDARD}></Icon><span>Home</span> </Button>
-                    <Button className={`${Classes.BUTTON} ${Classes.MINIMAL}`}><Icon icon={IconNames.DOCUMENT} iconSize={Icon.SIZE_STANDARD}></Icon><span>Document</span></Button>
-                    <span className={Classes.NAVBAR_DIVIDER} ></span>
-                    <Button className={`${Classes.BUTTON} ${Classes.MINIMAL}`}><Icon icon={IconNames.USER} iconSize={Icon.SIZE_STANDARD}></Icon> </Button>
-                    <Button className={`${Classes.BUTTON} ${Classes.MINIMAL}`}><Icon icon={IconNames.NOTIFICATIONS} iconSize={Icon.SIZE_STANDARD}></Icon> </Button>
-                    <Button className={`${Classes.BUTTON} ${Classes.MINIMAL}`}><Icon icon={IconNames.COG} iconSize={Icon.SIZE_STANDARD}></Icon> </Button>
-                  </div>
+            <Navbar style={{width: "100%"}} className={`${Classes.NAVBAR} ${Classes.DARK}`}>
+              <div className={`${Classes.NAVBAR_GROUP} ${Classes.ALIGN_LEFT}`}>
+                <div className={Classes.NAVBAR_HEADING}>
+                  <Icon icon={IconNames.GLOBE_NETWORK} iconSize={Icon.SIZE_LARGE}></Icon>
+                  <span>{" "}Global Trade Dependencies</span>
                 </div>
-              </Navbar>
+              
+                <div className={`${Classes.NAVBAR_GROUP} ${Classes.ALIGN_RIGHT}`}>
+                  <Button className={`${Classes.BUTTON} ${Classes.MINIMAL} button` }>
+                    <Icon icon={IconNames.LIGHTBULB} iconSize={Icon.SIZE_STANDARD}></Icon>
+                    <span>{" "}Documentation</span>
+                  </Button>
+                  <span className={Classes.NAVBAR_DIVIDER} ></span>
+                  <Button 
+                    className={`${Classes.BUTTON} ${Classes.MINIMAL} button`}
+                    active={this.props.showProductPannel}
+                    onClick={this.props.handleClickDisplayProductPannel}
+                  >
+                    <Icon icon={IconNames.PIE_CHART} iconSize={Icon.SIZE_STANDARD}></Icon>
+                    <span>{" "}Product Pannel</span>
+                  </Button>
+                  <Button 
+                    className={`${Classes.BUTTON} ${Classes.MINIMAL} button`}
+                    active={this.props.showCountriesPannel}
+                    onClick={this.props.handleClickDisplayCountryPannel}
+                  >
+                    <Icon icon={IconNames.SWAP_HORIZONTAL} iconSize={Icon.SIZE_STANDARD}></Icon>
+                    <span>{" "}Countries Pannel</span>
+                  </Button> 
+                  <span className={Classes.NAVBAR_DIVIDER} ></span>
+                  <Button 
+                    className={`${Classes.BUTTON} ${Classes.MINIMAL} button`}
+                    active={this.props.mapProjection === "3d"}
+                    onClick={this.props.handleClick3d}
+                  >
+                    <Icon icon={IconNames.GLOBE} iconSize={Icon.SIZE_STANDARD}></Icon>
+                    <span>{" "}Globe View</span>
+                  </Button>  
+                  <Button 
+                    className={`${Classes.BUTTON} ${Classes.MINIMAL} button`}
+                    active={this.props.mapProjection === "2d"}
+                    onClick={this.props.handleClick2d}
+                  >
+                    <Icon icon={IconNames.MAP} iconSize={Icon.SIZE_STANDARD}></Icon>
+                    <span>{" "}Map View</span>
+                  </Button>
+                </div>
+              </div>
+            </Navbar>
         );
     }
 }
