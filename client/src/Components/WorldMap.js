@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import '../App.css'
-import { geoOrthographic, geoPath } from 'd3-geo'
+import { geoOrthographic, geoPath, geoMercator, geoNaturalEarth1 } from 'd3-geo'
 import Draggable from 'react-draggable';
 import { selectAll} from 'd3-selection'
 import { timer } from 'd3-timer'
@@ -23,9 +23,12 @@ class WorldMap extends Component {
 
   render() {
     const sphere = ({type: "Sphere"})
-    
-    const projection = geoOrthographic().fitExtent([[10, 10], [this.props.size[0], this.props.size[1]]], sphere).rotate(this.props.position)     
-    
+    var projection = geoOrthographic().fitExtent([[15, 15], [this.props.size[0] * 0.9, this.props.size[1]]], sphere).rotate(this.props.position)     
+   
+    if(this.props.projection === "2d"){
+      projection = geoNaturalEarth1().fitExtent([[0, 0], [this.props.size[0], this.props.size[1]]], sphere).rotate(this.props.position)     
+    } else {
+       }
     const pathGenerator = geoPath().projection(projection)
 
     const countriesBalance = this.props.countryBalance.reduce( (obj, cb) => {
@@ -35,7 +38,6 @@ class WorldMap extends Component {
     const interval = this.props.countryBalance.reduce( (minMax, cb) => [Math.min(minMax[0], cb.export_value- cb.import_value ),Math.max(minMax[1], cb.export_value- cb.import_value)] ,  [0,0])
     
     const pickColor = (country) => {
-      
       if (!(country in countriesBalance)){
         return this.white;
       } 
@@ -53,7 +55,9 @@ class WorldMap extends Component {
       .map((d,i) => <path
         key={"path" + i}
         d={pathGenerator(d)}
-        onMouseEnter={() => {this.props.onHover(d)}}
+        onMouseEnter={() => {this.props.onHover(d.id)}}
+        onMouseLeave={() => {this.props.onHover(this.props.selectedCountry.countryCode)}}
+        onClick={() => this.props.onClick({country: "", countryCode: d.id})}
         style={{fill: this.props.hoverElement === d.id ? this.hover : pickColor(d.id), stroke: "#808080", strokeOpacity: 0.5 }}
         className="countries"
       />)
@@ -167,13 +171,8 @@ class WorldMap extends Component {
                 cx.fill();
             }
            
-        }  
-
-    
-    
+        }    
   }
-
-
 }
 
 export default WorldMap
