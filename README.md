@@ -1,8 +1,9 @@
 # tradeVisualizationD3
 
-Waiting for approval from comtrade to use their data before re-hosting.
+Hosting Status: Waiting for approval from comtrade to publish with their data
 
 Visualization Example: https://observablehq.com/@raphaelcharriez/dynamic-flows-on-a-map
+![](intro.gif)
 
 ## Concept:  
 
