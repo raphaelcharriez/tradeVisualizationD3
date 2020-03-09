@@ -1,6 +1,7 @@
 # tradeVisualizationD3
 
-Visualization Example: https://observablehq.com/@raphaelcharriez/dynamic-flows-on-a-map
+Waiting for Comtrade authorization to publish their data before hosting.
+Widget Mockup: https://observablehq.com/@raphaelcharriez/dynamic-flows-on-a-map
 ![](intro.gif)
 
 ## Concept:  
