@@ -49,7 +49,6 @@ Let's look at the top imports from Frane declared by the US in 2018.
 
 Aircrafts Parts, Nuclear Components, and Pharmaceutical products are reciprocal and probably interconnected. On the other hand Beverage imports and Wine in particular are not symetrical. Let's click on the product. The map changes: 
 
-<gif 2> 
 ![](map.gif)
 
 France's export to the US dominates the market, the US has infinite leverage here. Especially since they have a local production that they don't seem to export much, to pursue the analysis further we would look for more detailed consumption data, local production, price elasticity models. 
