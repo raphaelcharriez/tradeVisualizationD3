@@ -42,9 +42,20 @@ The visualisation is inspired by https://bl.ocks.org/emeeks/21f99959d48dd0d0c746
 The sunburst diagram is inspired by https://www.c4reports.org/lux-and-loaded’s report on North Korea’s luxury good imports  
  
 ### Workflow Example: 
-To Do: complete data and explain why the US has plans to tax European aircrafts, olive oil, cheese, whisky, fishes, fruits, motocycles, cars, clothes, dairy product, and try to guess which products are most likely to be left untouched 
- 
+To Do: US taxing France.
 
+Let's look at the top imports from Frane declared by the US in 2018. 
+![](product.gif)
+
+Aircrafts Parts, Nuclear Components, and Pharmaceutical products are reciprocal and probably interconnected. On the other hand Beverage imports and Wine in particular are not symetrical. Let's click on the product. The map changes: 
+
+<gif 2> 
+![](map.gif)
+
+France's export to the US dominates the market, the US has infinite leverage here. Especially since they have a local production that they don't seem to export much, to pursue the analysis further we would look for more detailed consumption data, local production, price elasticity models. 
+
+
+ 
 ### Technology used: 
 Around ~50 million rows, few gb of data. 
 Most common relational databases like Postgres and MySQL can handle that scale. I used Postgres + Express by familiarity 
