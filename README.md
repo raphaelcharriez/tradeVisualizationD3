@@ -2,7 +2,7 @@
 
 Waiting for approval from comtrade to use their data before re-hosting.
 
-Visualization Example: https://observablehq.com/@raphaelcharriez/map-flux-vizualisation
+Visualization Example: https://observablehq.com/@raphaelcharriez/dynamic-flows-on-a-map
 
 ## Concept:  
 
