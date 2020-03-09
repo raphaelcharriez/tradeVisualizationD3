@@ -1,6 +1,6 @@
 # tradeVisualizationD3
 
-Waiting for approval from comtrade to re-use their data before re-hosting.
+Waiting for approval from comtrade to use their data before re-hosting.
 
 Visualization Example: https://observablehq.com/@raphaelcharriez/map-flux-vizualisation
 
