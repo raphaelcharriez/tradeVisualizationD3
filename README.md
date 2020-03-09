@@ -1,6 +1,8 @@
 # tradeVisualizationD3
 
-Application Deployed: https://map-dot-globaltrade-254409.appspot.com/
+Waiting for approval from comtrade to re-use their data before re-hosting.
+
+Visualization Example: https://observablehq.com/@raphaelcharriez/map-flux-vizualisation
 
 ## Concept:  
 
