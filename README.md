@@ -1,7 +1,5 @@
 # tradeVisualizationD3
 
-Hosting Status: Waiting for approval from comtrade to publish with their data
-
 Visualization Example: https://observablehq.com/@raphaelcharriez/dynamic-flows-on-a-map
 ![](intro.gif)
 
