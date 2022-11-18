@@ -23,7 +23,7 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-draggable": "^3.3.2",
-    "react-scripts": "3.1.1",
+    "react-scripts": "5.0.1",
     "react-select": "^3.0.4",
     "tslint": "^5.20.0",
     "tslint-blueprint": "^0.1.0",
